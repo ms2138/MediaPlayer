@@ -11,6 +11,16 @@ class MediaPlayerView: UIView {
     let activityIndicatorView = UIActivityIndicatorView(style: .medium)
     private let mediaView = UIView(frame: .zero)
     private let mediaPlayer = VLCMediaPlayer()
+    var isMuted: Bool = true {
+        willSet {
+            mediaPlayer.audio.volume = (newValue == true) ? 0 : 100
+        }
+    }
+    var aspectRatio: String = "16:9" {
+        willSet {
+            mediaPlayer.videoAspectRatio = UnsafeMutablePointer<Int8>(mutating: (newValue as NSString).utf8String)
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
