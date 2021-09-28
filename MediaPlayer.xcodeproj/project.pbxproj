@@ -13,6 +13,7 @@
 		3C73358F2702D19300A7604D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C73358E2702D19300A7604D /* Assets.xcassets */; };
 		3C7335922702D19300A7604D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7335902702D19300A7604D /* LaunchScreen.storyboard */; };
 		3C7335A32702D53600A7604D /* MediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7335A22702D53600A7604D /* MediaPlayerView.swift */; };
+		3C7335A92702D6E600A7604D /* MediaControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7335A82702D6E600A7604D /* MediaControlView.swift */; };
 		3D3B030012F080D3095AF362 /* Pods_MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2501563ECEDB2ABC4272580B /* Pods_MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		3C7335932702D19400A7604D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C7335A02702D4B900A7604D /* MediaPlayer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MediaPlayer-Bridging-Header.h"; sourceTree = "<group>"; };
 		3C7335A22702D53600A7604D /* MediaPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerView.swift; sourceTree = "<group>"; };
+		3C7335A82702D6E600A7604D /* MediaControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaControlView.swift; sourceTree = "<group>"; };
 		412898A3F05A84820C6A394E /* Pods-MediaPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaPlayer.release.xcconfig"; path = "Target Support Files/Pods-MediaPlayer/Pods-MediaPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		D246795707056495A24D8D1E /* Pods-MediaPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaPlayer.debug.xcconfig"; path = "Target Support Files/Pods-MediaPlayer/Pods-MediaPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				3C7335A22702D53600A7604D /* MediaPlayerView.swift */,
+				3C7335A82702D6E600A7604D /* MediaControlView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7335862702D19100A7604D /* AppDelegate.swift in Sources */,
+				3C7335A92702D6E600A7604D /* MediaControlView.swift in Sources */,
 				3C7335A32702D53600A7604D /* MediaPlayerView.swift in Sources */,
 				3C7335882702D19100A7604D /* SceneDelegate.swift in Sources */,
 			);
