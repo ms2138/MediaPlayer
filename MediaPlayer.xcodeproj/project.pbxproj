@@ -66,7 +66,7 @@
 			children = (
 				3C7335852702D19100A7604D /* AppDelegate.swift */,
 				3C7335872702D19100A7604D /* SceneDelegate.swift */,
-				3C7335A22702D53600A7604D /* MediaPlayerView.swift */,
+				3C7335A62702D69C00A7604D /* Views */,
 				3C73358B2702D19100A7604D /* Main.storyboard */,
 				3C73358E2702D19300A7604D /* Assets.xcassets */,
 				3C7335902702D19300A7604D /* LaunchScreen.storyboard */,
@@ -74,6 +74,14 @@
 				3C7335A02702D4B900A7604D /* MediaPlayer-Bridging-Header.h */,
 			);
 			path = MediaPlayer;
+			sourceTree = "<group>";
+		};
+		3C7335A62702D69C00A7604D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3C7335A22702D53600A7604D /* MediaPlayerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		56EFEFD2F99D46473810D32F /* Pods */ = {
