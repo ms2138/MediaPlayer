@@ -57,3 +57,19 @@ class MediaPlayerView: UIView {
         mediaPlayer.drawable = mediaView
     }
 }
+
+extension MediaPlayerView {
+    // MARK: - Media player action methods
+
+    func pause() {
+        mediaPlayer.pause()
+    }
+
+    func play() {
+        mediaPlayer.play()
+    }
+
+    func stop() {
+        mediaPlayer.stop()
+    }
+}
