@@ -16,6 +16,7 @@ class MediaControlView: UIView {
     var totalTimeLabel   = UILabel()
 
     var playButton = UIButton(type: UIButton.ButtonType.custom)
+    var positionSlider = UISlider()
 
     var isPlaying: Bool = false
 
@@ -42,6 +43,7 @@ class MediaControlView: UIView {
         currentTimeLabel.translatesAutoresizingMaskIntoConstraints = false
 
         playButton.translatesAutoresizingMaskIntoConstraints = false
+        positionSlider.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(mainView)
         mainView.addSubview(topView)
@@ -50,6 +52,10 @@ class MediaControlView: UIView {
 
         playButton.setImage(isPlaying ? UIImage(named: "pause") : UIImage(named: "play"),  for: .normal)
         playButton.setImage(isPlaying ? UIImage(named: "play") : UIImage(named: "pause"), for: .highlighted)
+
+        positionSlider.maximumValue = 1.0
+        positionSlider.minimumValue = 0.0
+        positionSlider.value = 0.0
 
         bottomView.addSubview(totalTimeLabel)
         bottomView.addSubview(currentTimeLabel)
