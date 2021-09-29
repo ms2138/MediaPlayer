@@ -12,6 +12,9 @@ class MediaControlView: UIView {
     var topView = UIView(frame: .zero)
     var bottomView = UIView(frame: .zero)
 
+    var currentTimeLabel = UILabel()
+    var totalTimeLabel   = UILabel()
+
     var playButton = UIButton(type: UIButton.ButtonType.custom)
 
     var isPlaying: Bool = false
@@ -35,6 +38,9 @@ class MediaControlView: UIView {
         topView.translatesAutoresizingMaskIntoConstraints = false
         bottomView.translatesAutoresizingMaskIntoConstraints = false
 
+        totalTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        currentTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+
         playButton.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(mainView)
@@ -42,10 +48,11 @@ class MediaControlView: UIView {
         mainView.addSubview(bottomView)
         mainView.backgroundColor = UIColor(white: 0, alpha: 0.0)
 
-        playButton.tag = 0
         playButton.setImage(isPlaying ? UIImage(named: "pause") : UIImage(named: "play"),  for: .normal)
         playButton.setImage(isPlaying ? UIImage(named: "play") : UIImage(named: "pause"), for: .highlighted)
 
+        bottomView.addSubview(totalTimeLabel)
+        bottomView.addSubview(currentTimeLabel)
         bottomView.addSubview(playButton)
     }
 
