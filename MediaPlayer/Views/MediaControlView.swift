@@ -16,6 +16,7 @@ class MediaControlView: UIView {
     var totalTimeLabel   = UILabel()
 
     var playButton = UIButton(type: UIButton.ButtonType.custom)
+    var closeButton = UIButton(type: UIButton.ButtonType.custom)
     var positionSlider = UISlider()
 
     var isPlaying: Bool = false
@@ -43,23 +44,29 @@ class MediaControlView: UIView {
         currentTimeLabel.translatesAutoresizingMaskIntoConstraints = false
 
         playButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
         positionSlider.translatesAutoresizingMaskIntoConstraints = false
 
-        addSubview(mainView)
-        mainView.addSubview(topView)
-        mainView.addSubview(bottomView)
         mainView.backgroundColor = UIColor(white: 0, alpha: 0.0)
 
         playButton.setImage(isPlaying ? UIImage(named: "pause") : UIImage(named: "play"),  for: .normal)
         playButton.setImage(isPlaying ? UIImage(named: "play") : UIImage(named: "pause"), for: .highlighted)
 
+        closeButton.setImage(UIImage(named: "close"), for: .normal)
+
         positionSlider.maximumValue = 1.0
         positionSlider.minimumValue = 0.0
         positionSlider.value = 0.0
 
+        addSubview(mainView)
+        mainView.addSubview(topView)
+        mainView.addSubview(bottomView)
+
         bottomView.addSubview(totalTimeLabel)
         bottomView.addSubview(currentTimeLabel)
         bottomView.addSubview(playButton)
+
+        topView.addSubview(closeButton)
     }
 
     func setupConstraints() {
@@ -83,6 +90,11 @@ class MediaControlView: UIView {
             playButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
             playButton.heightAnchor.constraint(equalToConstant: 50.0),
             playButton.widthAnchor.constraint(equalToConstant: 50.0),
+
+            closeButton.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
+            closeButton.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
+            closeButton.heightAnchor.constraint(equalToConstant: 50.0),
+            closeButton.widthAnchor.constraint(equalToConstant: 50.0),
 
             currentTimeLabel.leadingAnchor.constraint(equalTo: playButton.trailingAnchor),
             currentTimeLabel.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
