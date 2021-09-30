@@ -7,7 +7,17 @@
 
 import UIKit
 
+protocol MediaControlViewDelegate: class {
+    func mediaControlView(controlView: MediaControlView, didPerformAction action: MediaControlView.Action)
+    func mediaControlView(controlView: MediaControlView, slider: UISlider)
+    func mediaControlView(controlView: MediaControlView, slider: UISlider, onSliderTapped position: Float)
+}
+
 class MediaControlView: UIView {
+    enum Action {
+        case play, pause, close
+    }
+
     var mainView = UIView(frame: .zero)
     var topView = UIView(frame: .zero)
     var bottomView = UIView(frame: .zero)
@@ -20,6 +30,8 @@ class MediaControlView: UIView {
     var positionSlider = UISlider()
 
     var isPlaying: Bool = false
+
+    weak var delegate: MediaControlViewDelegate?
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
