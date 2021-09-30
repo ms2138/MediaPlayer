@@ -63,6 +63,41 @@ class MediaControlView: UIView {
     }
 
     func setupConstraints() {
+        NSLayoutConstraint.activate([
+            mainView.topAnchor.constraint(equalTo: self.topAnchor),
+            mainView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            mainView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            mainView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
 
+            topView.topAnchor.constraint(equalTo: mainView.topAnchor),
+            topView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            topView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            topView.heightAnchor.constraint(equalToConstant: 50.0),
+
+            bottomView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor),
+            bottomView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            bottomView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            bottomView.heightAnchor.constraint(equalToConstant: 50.0),
+
+            playButton.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor),
+            playButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+            playButton.heightAnchor.constraint(equalToConstant: 50.0),
+            playButton.widthAnchor.constraint(equalToConstant: 50.0),
+
+            currentTimeLabel.leadingAnchor.constraint(equalTo: playButton.trailingAnchor),
+            currentTimeLabel.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+            currentTimeLabel.heightAnchor.constraint(equalToConstant: 50.0),
+            currentTimeLabel.widthAnchor.constraint(equalToConstant: 50.0),
+
+            totalTimeLabel.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -4.0),
+            totalTimeLabel.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+            totalTimeLabel.heightAnchor.constraint(equalToConstant: 50.0),
+            totalTimeLabel.widthAnchor.constraint(equalToConstant: 50.0),
+
+            positionSlider.leadingAnchor.constraint(equalTo: currentTimeLabel.trailingAnchor),
+            positionSlider.trailingAnchor.constraint(equalTo: totalTimeLabel.leadingAnchor),
+            positionSlider.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor),
+            positionSlider.heightAnchor.constraint(equalToConstant: 50.0)
+        ])
     }
 }
