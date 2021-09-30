@@ -125,3 +125,20 @@ class MediaControlView: UIView {
         ])
     }
 }
+
+extension MediaControlView {
+    @objc func positionSliderValueChanged(sender: UISlider) {
+        delegate?.mediaControlView(controlView: self, slider: positionSlider)
+    }
+
+    @objc func playButtonPressed(sender: UIButton) {
+        isPlaying = !isPlaying
+        playButton.setImage(isPlaying ? UIImage(named: "play") : UIImage(named: "pause"),  for: .normal)
+        playButton.setImage(isPlaying ? UIImage(named: "pause") : UIImage(named: "play"), for: .highlighted)
+        if (isPlaying == true) {
+            delegate?.mediaControlView(controlView: self, didPerformAction: .pause)
+        } else {
+            delegate?.mediaControlView(controlView: self, didPerformAction: .play)
+        }
+    }
+}
