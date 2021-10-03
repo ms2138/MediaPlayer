@@ -22,6 +22,8 @@ class MediaPlayerView: UIView {
             mediaPlayer.videoAspectRatio = UnsafeMutablePointer<Int8>(mutating: (newValue as NSString).utf8String)
         }
     }
+    var close: (() -> Void)?
+    var fullScreen: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -86,8 +88,10 @@ extension MediaPlayerView: MediaControlViewDelegate {
                 self.play()
             case .pause:
                 self.pause()
-            default:
-                break
+            case .fullScreen:
+                self.fullScreen?()
+            case .close:
+                self.close?()
         }
     }
 
