@@ -11,6 +11,7 @@ class MediaPlayerView: UIView {
     let activityIndicatorView = UIActivityIndicatorView(style: .medium)
     private let mediaView = UIView(frame: .zero)
     private let mediaPlayer = VLCMediaPlayer()
+    var mediaControlView = MediaControlView(frame: .zero)
     var isMuted: Bool = true {
         willSet {
             mediaPlayer.audio.volume = (newValue == true) ? 0 : 100
@@ -42,7 +43,10 @@ class MediaPlayerView: UIView {
         mediaView.isUserInteractionEnabled = false
         mediaView.translatesAutoresizingMaskIntoConstraints = false
 
+        mediaControlView.translatesAutoresizingMaskIntoConstraints = false
+
         addSubview(mediaView)
+        insertSubview(mediaControlView, aboveSubview: mediaView)
         addSubview(activityIndicatorView)
 
         NSLayoutConstraint.activate([
