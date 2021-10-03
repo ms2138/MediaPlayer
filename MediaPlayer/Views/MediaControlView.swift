@@ -34,6 +34,8 @@ class MediaControlView: UIView {
     var isPlaying: Bool = false
     var isMediaControlShown: Bool = true
 
+    private var tapGesture: UITapGestureRecognizer!
+
     weak var delegate: MediaControlViewDelegate?
 
     override public init(frame: CGRect) {
@@ -82,6 +84,9 @@ class MediaControlView: UIView {
         bottomView.addSubview(playButton)
 
         topView.addSubview(closeButton)
+
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTapGesture))
+        addGestureRecognizer(tapGesture)
     }
 
     func setupConstraints() {
@@ -130,6 +135,8 @@ class MediaControlView: UIView {
 }
 
 extension MediaControlView {
+    // MARK: - Media control view action methods
+
     @objc func positionSliderValueChanged(sender: UISlider) {
         delegate?.mediaControlView(controlView: self, slider: positionSlider)
     }
@@ -147,6 +154,10 @@ extension MediaControlView {
 
     @objc func closeButtonPressed(sender: UIButton) {
         delegate?.mediaControlView(controlView: self, didPerformAction: .close)
+    }
+
+    @objc open func onTapGesture(_ gesture: UITapGestureRecognizer) {
+        animateMediaControlViewDisplay(isVisible: !isMediaControlShown)
     }
 }
 
