@@ -81,7 +81,29 @@ extension MediaPlayerView {
     }
 }
 
+extension MediaPlayerView {
+    // MARK: - Media player state methods
+
+    func mediaPlayerTimeChanged(_ aNotification: Notification!) {
+        mediaControlView.currentTimeLabel.text = mediaPlayer.time.stringValue
+        mediaControlView.totalTimeLabel.text = mediaPlayer.remainingTime.stringValue
+        mediaControlView.positionSlider.setValue(mediaPlayer.position, animated: true)
+    }
+
+    func mediaPlayerStateChanged(_ aNotification: Notification!) {
+        if (mediaPlayer.state == .buffering) {
+            activityIndicatorView.startAnimating()
+        }
+
+        if (mediaPlayer.isPlaying == true) {
+            activityIndicatorView.stopAnimating()
+        }
+    }
+}
+
 extension MediaPlayerView: MediaControlViewDelegate {
+    // MARK: - MediaControlView delegate methods
+
     func mediaControlView(controlView: MediaControlView, didPerformAction action: MediaControlView.Action) {
         switch action {
             case .play:
