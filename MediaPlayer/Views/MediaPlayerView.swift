@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MediaPlayerView: UIView {
+class MediaPlayerView: UIView, VLCMediaPlayerDelegate {
     let activityIndicatorView = UIActivityIndicatorView(style: .medium)
     private let mediaView = UIView(frame: .zero)
     private let mediaPlayer = VLCMediaPlayer()
@@ -78,6 +78,21 @@ extension MediaPlayerView {
 
     func stop() {
         mediaPlayer.stop()
+    }
+
+    func loadVideo(from url: URL) {
+        let media = VLCMedia(url: url)
+        mediaPlayer.media = media
+
+        mediaPlayer.delegate = self
+        mediaControlView.isPlaying = mediaPlayer.isPlaying
+        mediaControlView.currentTimeLabel.text = mediaPlayer.time.stringValue
+        mediaControlView.positionSlider.setValue(mediaPlayer.position, animated: true)
+        mediaPlayer.play()
+
+        if(media.metaDictionary.index(forKey: "title") != nil) {
+            mediaControlView.titleLabel.text = media.metadata(forKey: "title")
+        }
     }
 }
 
