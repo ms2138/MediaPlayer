@@ -24,6 +24,7 @@ class MediaControlView: UIView {
 
     var currentTimeLabel = UILabel()
     var totalTimeLabel   = UILabel()
+    var titleLabel = UILabel()
 
     var playButton = UIButton(type: UIButton.ButtonType.custom)
     var closeButton = UIButton(type: UIButton.ButtonType.custom)
@@ -59,6 +60,7 @@ class MediaControlView: UIView {
 
         totalTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         currentTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
         playButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -75,6 +77,10 @@ class MediaControlView: UIView {
         positionSlider.minimumValue = 0.0
         positionSlider.value = 0.0
 
+        titleLabel.text = "Title"
+        titleLabel.textColor = UIColor.white
+        titleLabel.textAlignment = .center
+
         addSubview(mainView)
         mainView.addSubview(topView)
         mainView.addSubview(bottomView)
@@ -84,6 +90,7 @@ class MediaControlView: UIView {
         bottomView.addSubview(playButton)
 
         topView.addSubview(closeButton)
+        topView.addSubview(titleLabel)
 
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTapGesture))
         addGestureRecognizer(tapGesture)
@@ -115,6 +122,11 @@ class MediaControlView: UIView {
             closeButton.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
             closeButton.heightAnchor.constraint(equalToConstant: 50.0),
             closeButton.widthAnchor.constraint(equalToConstant: 50.0),
+
+            titleLabel.leadingAnchor.constraint(equalTo: closeButton.trailingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
+            titleLabel.topAnchor.constraint(equalTo: topView.topAnchor),
 
             currentTimeLabel.leadingAnchor.constraint(equalTo: playButton.trailingAnchor),
             currentTimeLabel.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
