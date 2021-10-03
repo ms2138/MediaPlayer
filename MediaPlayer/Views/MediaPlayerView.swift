@@ -43,6 +43,7 @@ class MediaPlayerView: UIView {
         mediaView.isUserInteractionEnabled = false
         mediaView.translatesAutoresizingMaskIntoConstraints = false
 
+        mediaControlView.delegate = self
         mediaControlView.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(mediaView)
@@ -75,5 +76,26 @@ extension MediaPlayerView {
 
     func stop() {
         mediaPlayer.stop()
+    }
+}
+
+extension MediaPlayerView: MediaControlViewDelegate {
+    func mediaControlView(controlView: MediaControlView, didPerformAction action: MediaControlView.Action) {
+        switch action {
+            case .play:
+                self.play()
+            case .pause:
+                self.pause()
+            default:
+                break
+        }
+    }
+
+    func mediaControlView(controlView: MediaControlView, slider: UISlider) {
+        mediaPlayer.position = slider.value
+    }
+
+    func mediaControlView(controlView: MediaControlView, slider: UISlider, onSliderTapped position: Float) {
+        mediaPlayer.position = position
     }
 }
