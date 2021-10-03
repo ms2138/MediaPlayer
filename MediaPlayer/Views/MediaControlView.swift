@@ -144,6 +144,10 @@ extension MediaControlView {
             delegate?.mediaControlView(controlView: self, didPerformAction: .play)
         }
     }
+
+    @objc func closeButtonPressed(sender: UIButton) {
+        delegate?.mediaControlView(controlView: self, didPerformAction: .close)
+    }
 }
 
 extension MediaControlView {
