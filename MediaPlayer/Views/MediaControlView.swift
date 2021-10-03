@@ -29,7 +29,10 @@ class MediaControlView: UIView {
     var closeButton = UIButton(type: UIButton.ButtonType.custom)
     var positionSlider = UISlider()
 
+    var delayItem: DispatchWorkItem?
+
     var isPlaying: Bool = false
+    var isMediaControlShown: Bool = true
 
     weak var delegate: MediaControlViewDelegate?
 
@@ -140,5 +143,32 @@ extension MediaControlView {
         } else {
             delegate?.mediaControlView(controlView: self, didPerformAction: .play)
         }
+    }
+}
+
+extension MediaControlView {
+    private func animateMediaControlViewDisplay(isVisible: Bool) {
+        let alpha: CGFloat = isVisible ? 1.0 : 0.0
+        isMediaControlShown = isVisible
+
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            guard let weakSelf = self else { return }
+            weakSelf.topView.alpha = alpha
+            weakSelf.bottomView.alpha = alpha
+            weakSelf.mainView.backgroundColor = UIColor(white: 0, alpha: isVisible ? 0.2 : 0.0)
+        }) { [weak self] (_) in
+            if (isVisible == true) {
+                self?.autoFadeOutMediaControlView()
+            }
+        }
+    }
+
+    func autoFadeOutMediaControlView() {
+        delayItem?.cancel()
+        delayItem = DispatchWorkItem { [weak self] in
+            self?.animateMediaControlViewDisplay(isVisible: false)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0,
+                                      execute: delayItem!)
     }
 }
