@@ -15,7 +15,7 @@ protocol MediaControlViewDelegate: class {
 
 class MediaControlView: UIView {
     enum Action {
-        case play, pause, close
+        case play, pause, close, fullScreen
     }
 
     var mainView = UIView(frame: .zero)
@@ -28,6 +28,7 @@ class MediaControlView: UIView {
 
     var playButton = UIButton(type: UIButton.ButtonType.custom)
     var closeButton = UIButton(type: UIButton.ButtonType.custom)
+    var fullScreenButton = UIButton(type: UIButton.ButtonType.custom)
     var positionSlider = UISlider()
 
     var delayItem: DispatchWorkItem?
@@ -64,6 +65,7 @@ class MediaControlView: UIView {
 
         playButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.translatesAutoresizingMaskIntoConstraints = false
+        fullScreenButton.translatesAutoresizingMaskIntoConstraints = false
         positionSlider.translatesAutoresizingMaskIntoConstraints = false
 
         mainView.backgroundColor = UIColor(white: 0, alpha: 0.0)
@@ -81,6 +83,9 @@ class MediaControlView: UIView {
         titleLabel.textColor = UIColor.white
         titleLabel.textAlignment = .center
 
+        fullScreenButton.setImage(UIImage(named: "fullscreen"),    for: .normal)
+        fullScreenButton.addTarget(self, action: #selector(fullScreenButtonPressed), for: .touchUpInside)
+
         addSubview(mainView)
         mainView.addSubview(topView)
         mainView.addSubview(bottomView)
@@ -91,6 +96,7 @@ class MediaControlView: UIView {
 
         topView.addSubview(closeButton)
         topView.addSubview(titleLabel)
+        topView.addSubview(fullScreenButton)
 
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTapGesture))
         addGestureRecognizer(tapGesture)
@@ -124,9 +130,14 @@ class MediaControlView: UIView {
             closeButton.widthAnchor.constraint(equalToConstant: 50.0),
 
             titleLabel.leadingAnchor.constraint(equalTo: closeButton.trailingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: fullScreenButton.leadingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
             titleLabel.topAnchor.constraint(equalTo: topView.topAnchor),
+
+            fullScreenButton.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
+            fullScreenButton.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
+            fullScreenButton.heightAnchor.constraint(equalToConstant: 50.0),
+            fullScreenButton.widthAnchor.constraint(equalToConstant: 50.0),
 
             currentTimeLabel.leadingAnchor.constraint(equalTo: playButton.trailingAnchor),
             currentTimeLabel.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
@@ -166,6 +177,10 @@ extension MediaControlView {
 
     @objc func closeButtonPressed(sender: UIButton) {
         delegate?.mediaControlView(controlView: self, didPerformAction: .close)
+    }
+
+    @objc func fullScreenButtonPressed(sender: UIButton) {
+        delegate?.mediaControlView(controlView: self, didPerformAction: .fullScreen)
     }
 
     @objc open func onTapGesture(_ gesture: UITapGestureRecognizer) {
