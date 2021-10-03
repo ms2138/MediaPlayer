@@ -100,6 +100,9 @@ class MediaControlView: UIView {
 
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTapGesture))
         addGestureRecognizer(tapGesture)
+
+        let positionSliderTapGesture = UITapGestureRecognizer(target: self, action:#selector(positionSliderTapped))
+        positionSlider.addGestureRecognizer(positionSliderTapGesture)
     }
 
     func setupConstraints() {
@@ -162,6 +165,19 @@ extension MediaControlView {
 
     @objc func positionSliderValueChanged(sender: UISlider) {
         delegate?.mediaControlView(controlView: self, slider: positionSlider)
+    }
+
+    @objc func positionSliderTapped(sender: UIGestureRecognizer) {
+        let slider = sender.view as! UISlider
+        if (slider.isHighlighted) {
+            return
+        }
+        let point = sender.location(in: slider)
+        let percentage = point.x / slider.bounds.size.width;
+        let delta = Float(percentage) * (slider.maximumValue - slider.minimumValue);
+        let value = slider.minimumValue + delta;
+
+        delegate?.mediaControlView(controlView: self, slider: slider, onSliderTapped: value)
     }
 
     @objc func playButtonPressed(sender: UIButton) {
