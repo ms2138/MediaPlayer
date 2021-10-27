@@ -8,4 +8,8 @@
 import Foundation
 
 struct File {
+    var name: String
+    var path: String
+    var created: Date
+    var modified: Date
 }
