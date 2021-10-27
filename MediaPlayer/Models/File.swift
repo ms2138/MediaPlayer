@@ -12,6 +12,8 @@ struct File: Comparable {
     var path: String
     var created: Date
     var modified: Date
+    var size: Int64
+    var isDirectory: Bool
 
     static func < (lhs: File, rhs: File) -> Bool {
         lhs.name < rhs.name
