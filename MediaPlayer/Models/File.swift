@@ -7,9 +7,17 @@
 
 import Foundation
 
-struct File {
+struct File: Comparable {
     var name: String
     var path: String
     var created: Date
     var modified: Date
+
+    static func < (lhs: File, rhs: File) -> Bool {
+        lhs.name < rhs.name
+    }
+
+    static func > (lhs: File, rhs: File) -> Bool {
+        lhs.name > rhs.name
+    }
 }
