@@ -41,4 +41,36 @@ extension SMB2Client {
             completion(shares, error)
         }
     }
+
+    func connectShare(name: String, completion: @escaping (Error?) -> Void) {
+        client.connectShare(name: name) { error in
+            completion(error)
+        }
+    }
+
+    func contentsOfDirectory(atPath path: String, completion: @escaping ([File], Error?) -> Void) {
+        var files = [File]()
+        var error: Error?
+
+        client.contentsOfDirectory(atPath: path) { result in
+            switch result {
+                case .success(let listOfFiles):
+                    for entry in listOfFiles {
+                        let file = File(name: entry[.nameKey] as! String,
+                                        path: entry[.pathKey] as! String,
+                                        created: entry[.creationDateKey] as! Date,
+                                        modified: entry[.contentModificationDateKey] as! Date,
+                                        size: entry[.fileSizeKey] as! Int64,
+                                        isDirectory: entry[.isDirectoryKey] as! Bool
+                        )
+                        files.append(file)
+                    }
+                case .failure(let err):
+                    error = err
+
+            }
+
+            completion(files, error)
+        }
+    }
 }
