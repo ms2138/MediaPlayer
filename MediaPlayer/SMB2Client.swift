@@ -22,3 +22,23 @@ class SMB2Client {
         self.client = client
     }
 }
+
+extension SMB2Client {
+    func listShares(completion: @escaping ([Share], Error?) -> Void) {
+        var shares = [Share]()
+        var error: Error?
+
+        client.listShares { result in
+            switch result {
+                case .success(let listOfShares):
+                    for entry in listOfShares {
+                        let share = Share(name: entry.name, comment: entry.comment)
+                        shares.append(share)
+                    }
+                case .failure(let err):
+                    error = err
+            }
+            completion(shares, error)
+        }
+    }
+}
