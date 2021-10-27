@@ -8,5 +8,6 @@
 import Foundation
 
 struct Share {
-
+    var name: String
+    var comment: String
 }
