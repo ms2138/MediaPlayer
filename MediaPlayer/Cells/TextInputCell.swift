@@ -44,5 +44,22 @@ class TextInputCell: UITableViewCell {
         stackView.addArrangedSubview(textField)
 
         contentView.addSubview(stackView)
+
+        let labelConstraint = label.widthAnchor.constraint(equalToConstant: 80)
+        labelConstraint.priority = .init(999)
+        labelConstraint.isActive = true
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let margins = self.layoutMarginsGuide
+
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: margins.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+        ])
     }
 }
