@@ -83,7 +83,7 @@
 				3CC777DB272A4C5200FE8031 /* SMB */,
 				3C73360A2729130100A7604D /* Models */,
 				3C7335A62702D69C00A7604D /* Views */,
-				3C73358B2702D19100A7604D /* Main.storyboard */,
+				3C743B9E272A5EE40066AC90 /* Storyboards */,
 				3C73358E2702D19300A7604D /* Assets.xcassets */,
 				3C7335902702D19300A7604D /* LaunchScreen.storyboard */,
 				3C7335932702D19400A7604D /* Info.plist */,
@@ -124,6 +124,14 @@
 				3C743B99272A5DC00066AC90 /* FileManager+EXT.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3C743B9E272A5EE40066AC90 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3C73358B2702D19100A7604D /* Main.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		3CC777DB272A4C5200FE8031 /* SMB */ = {
