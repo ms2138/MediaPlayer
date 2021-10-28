@@ -35,5 +35,18 @@ extension LibraryViewController {
         cell.imageView?.image = UIImage(systemName: "film")
 
         return cell
-    }   
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let file = media.remove(at: indexPath.row)
+            let fileUrl = FileManager.default.pathToFile(filename: file.lastPathComponent)
+            do {
+                try FileManager.default.removeItem(at: fileUrl)
+            } catch {
+                print("Failed to delete")
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
