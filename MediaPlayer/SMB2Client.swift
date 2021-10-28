@@ -96,11 +96,20 @@ extension SMB2Client {
                     print("Failed to delete")
                 }
             }
-
             weakSelf.activeDownloads.removeValue(forKey: hashValue)
         }
 
         return hashValue
     }
 
+    func cancelDownloadItem(atPath path: String) {
+        let hashValue = path.hashValue
+        activeDownloads[hashValue] = false
+    }
+
+    func cancelAllDownloads() {
+        for (key, _) in activeDownloads {
+            activeDownloads[key] = false
+        }
+    }
 }
