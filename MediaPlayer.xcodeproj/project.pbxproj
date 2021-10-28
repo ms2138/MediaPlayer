@@ -18,6 +18,7 @@
 		3C7336082729111400A7604D /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7336072729111400A7604D /* Share.swift */; };
 		3C73360D2729133900A7604D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C73360C2729133900A7604D /* File.swift */; };
 		3C743B90272A59C80066AC90 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743B8F272A59C80066AC90 /* LibraryViewController.swift */; };
+		3C743B9A272A5DC00066AC90 /* FileManager+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743B99272A5DC00066AC90 /* FileManager+EXT.swift */; };
 		3D3B030012F080D3095AF362 /* Pods_MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2501563ECEDB2ABC4272580B /* Pods_MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		3C7336072729111400A7604D /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		3C73360C2729133900A7604D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		3C743B8F272A59C80066AC90 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		3C743B99272A5DC00066AC90 /* FileManager+EXT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+EXT.swift"; sourceTree = "<group>"; };
 		412898A3F05A84820C6A394E /* Pods-MediaPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaPlayer.release.xcconfig"; path = "Target Support Files/Pods-MediaPlayer/Pods-MediaPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		D246795707056495A24D8D1E /* Pods-MediaPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaPlayer.debug.xcconfig"; path = "Target Support Files/Pods-MediaPlayer/Pods-MediaPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +78,7 @@
 			children = (
 				3C7335852702D19100A7604D /* AppDelegate.swift */,
 				3C7335872702D19100A7604D /* SceneDelegate.swift */,
+				3C743B94272A5D7E0066AC90 /* Extensions */,
 				3C743B92272A59D20066AC90 /* Controllers */,
 				3CC777DB272A4C5200FE8031 /* SMB */,
 				3C73360A2729130100A7604D /* Models */,
@@ -113,6 +116,14 @@
 				3C743B8F272A59C80066AC90 /* LibraryViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3C743B94272A5D7E0066AC90 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3C743B99272A5DC00066AC90 /* FileManager+EXT.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		3CC777DB272A4C5200FE8031 /* SMB */ = {
@@ -257,6 +268,7 @@
 				3C7335862702D19100A7604D /* AppDelegate.swift in Sources */,
 				3C7336082729111400A7604D /* Share.swift in Sources */,
 				3C743B90272A59C80066AC90 /* LibraryViewController.swift in Sources */,
+				3C743B9A272A5DC00066AC90 /* FileManager+EXT.swift in Sources */,
 				3C73360D2729133900A7604D /* File.swift in Sources */,
 				3C73360427290EC200A7604D /* SMB2Client.swift in Sources */,
 				3C7335A92702D6E600A7604D /* MediaControlView.swift in Sources */,
