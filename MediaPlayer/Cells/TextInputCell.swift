@@ -8,6 +8,16 @@
 import Foundation
 
 class TextInputCell: UITableViewCell {
+    var keyboardType: UIKeyboardType = .default {
+        didSet {
+            textField.keyboardType = keyboardType
+        }
+    }
+    var returnKeyType: UIReturnKeyType = .default {
+        didSet {
+            textField.returnKeyType = returnKeyType
+        }
+    }
     let stackView = UIStackView(frame: .zero)
     let textField = UITextField(frame: .zero)
     let label = UILabel(frame: .zero)
