@@ -15,6 +15,12 @@ class AuthenticationViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        serverCell.textField.becomeFirstResponder()
+    }
 }
 
 extension AuthenticationViewController {
