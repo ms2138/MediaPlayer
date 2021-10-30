@@ -55,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="1660.8695652173915" y="150.66964285714286"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Custom Tab Bar Controller-->
         <scene sceneID="SVP-rg-hDH">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="9vZ-Ab-XJp" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="9vZ-Ab-XJp" customClass="CustomTabBarController" customModule="MediaPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A0R-Uj-OgC">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
