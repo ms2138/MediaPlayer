@@ -11,9 +11,20 @@ class AuthenticationViewController: UITableViewController, UITextFieldDelegate {
     var serverCell: TextInputCell!
     var usernameCell: TextInputCell!
     var passwordCell: TextInputCell!
+    let connectButtonItem = UIBarButtonItem(title: "Connect",
+                                            style: .done,
+                                            target: self,
+                                            action: #selector(connect))
+    let activityIndicatorButtonItem = UIBarButtonItem(customView: UIActivityIndicatorView(style: .medium))
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let indicator = activityIndicatorButtonItem.customView as! UIActivityIndicatorView
+        indicator.hidesWhenStopped = true
+
+        self.navigationItem.leftBarButtonItem = activityIndicatorButtonItem
+        self.navigationItem.rightBarButtonItem = connectButtonItem
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -67,6 +78,50 @@ extension AuthenticationViewController {
         }
 
         return cell
+    }
+}
+
+extension AuthenticationViewController {
+    @IBAction func connect() {
+        let validator = Validator()
+
+        if serverCell.textField.validate([validator.isIPAddressValid]) == false {
+            handleTextfieldValidation(in: serverCell.textField,
+                                      message: "Please enter a valid IP address")
+        }
+
+        if usernameCell.textField.validate([validator.isUsernameValid]) == false {
+            handleTextfieldValidation(in: usernameCell.textField,
+                                      message: "Please enter a valid username")
+        }
+
+        if let host = serverCell.textField.text,
+           let username = usernameCell.textField.text, let password = passwordCell.textField.text {
+            let newHost = "smb://" + host
+
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+
+            if let url = URL(string: newHost) {
+
+                let credential = URLCredential(user: username, password: password, persistence: URLCredential.Persistence.forSession)
+
+                guard let smbClient = SMB2Client(url: url, credential: credential) else { return }
+
+                let indicator = self.navigationItem.leftBarButtonItem?.customView as! UIActivityIndicatorView
+                indicator.startAnimating()
+
+                smbClient.listShares { [unowned self] (shares, error) in
+                    if error != nil {
+                        DispatchQueue.main.async {
+                            self.showAlert(title: "Error", message: "Failed to connect to server") {
+                                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                                indicator.stopAnimating()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
