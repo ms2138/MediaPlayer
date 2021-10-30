@@ -71,6 +71,22 @@ extension AuthenticationViewController {
 }
 
 extension AuthenticationViewController {
+    // MARK: - Alerts
+
+    func showAlert(title: String, message: String? = nil, dismiss: (() -> Void)? = nil) {
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            dismiss?()
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
+}
+
+extension AuthenticationViewController {
     // MARK: - Text field validation and changes
 
     func handleTextfieldValidation(in textField: UITextField, message: String) {
