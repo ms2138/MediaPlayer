@@ -20,6 +20,8 @@ class AuthenticationViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.title = "Connect To Server"
+
         let indicator = activityIndicatorButtonItem.customView as! UIActivityIndicatorView
         indicator.hidesWhenStopped = true
 
@@ -164,5 +166,22 @@ extension AuthenticationViewController {
                 sender.textColor = .black
             }
         }
+    }
+}
+
+extension AuthenticationViewController {
+    // MARK: - Text field delegate
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.returnKeyType == .done {
+            textField.resignFirstResponder()
+            connect()
+            return true
+        } else {
+            let cells = tableView.cells as! [TextInputCell]
+            let cell = cells[(textField.tag + 1) % cells.count]
+            cell.textField.becomeFirstResponder()
+        }
+        return true
     }
 }
