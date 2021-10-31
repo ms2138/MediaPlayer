@@ -42,11 +42,11 @@ extension LibraryViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let file = media.remove(at: indexPath.row)
-            let fileUrl = FileManager.default.pathToFile(filename: file.lastPathComponent)
+            let fileURL = FileManager.default.pathToFile(filename: file.lastPathComponent)
             do {
-                try FileManager.default.removeItem(at: fileUrl)
+                try FileManager.default.removeItem(at: fileURL)
             } catch {
-                print("Failed to delete")
+                debugLog("Failed to delete \(fileURL)")
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }

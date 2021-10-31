@@ -93,7 +93,7 @@ extension SMB2Client {
                 do {
                     try FileManager.default.removeItem(at: url)
                 } catch {
-                    print("Failed to delete")
+                    debugLog("Failed to delete \(url)")
                 }
             }
             weakSelf.activeDownloads.removeValue(forKey: hashValue)
