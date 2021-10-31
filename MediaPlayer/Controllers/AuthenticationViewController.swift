@@ -21,7 +21,7 @@ class AuthenticationViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "Connect To Server"
+        navigationItem.title = "Server"
 
         let indicator = activityIndicatorButtonItem.customView as! UIActivityIndicatorView
         indicator.hidesWhenStopped = true
