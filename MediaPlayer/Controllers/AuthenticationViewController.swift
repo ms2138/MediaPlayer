@@ -30,6 +30,8 @@ class AuthenticationViewController: UITableViewController, UITextFieldDelegate {
         self.navigationItem.rightBarButtonItem = connectButtonItem
 
         self.navigationItem.rightBarButtonItem?.isEnabled = false
+
+        tableView.allowsSelection = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
