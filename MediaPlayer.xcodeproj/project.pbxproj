@@ -30,6 +30,7 @@
 		3C743BBC272DF9430066AC90 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743BBB272DF9430066AC90 /* CustomTabBarController.swift */; };
 		3C743BC9272E3FFC0066AC90 /* SharesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743BC8272E3FFC0066AC90 /* SharesViewController.swift */; };
 		3C743BD0272E46F40066AC90 /* FilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743BCF272E46F40066AC90 /* FilesViewController.swift */; };
+		3C743BD5272F3D7B0066AC90 /* MediaPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743BD4272F3D7B0066AC90 /* MediaPlayerViewController.swift */; };
 		3D3B030012F080D3095AF362 /* Pods_MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2501563ECEDB2ABC4272580B /* Pods_MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		3C743BBB272DF9430066AC90 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		3C743BC8272E3FFC0066AC90 /* SharesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharesViewController.swift; sourceTree = "<group>"; };
 		3C743BCF272E46F40066AC90 /* FilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewController.swift; sourceTree = "<group>"; };
+		3C743BD4272F3D7B0066AC90 /* MediaPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerViewController.swift; sourceTree = "<group>"; };
 		412898A3F05A84820C6A394E /* Pods-MediaPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaPlayer.release.xcconfig"; path = "Target Support Files/Pods-MediaPlayer/Pods-MediaPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		D246795707056495A24D8D1E /* Pods-MediaPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaPlayer.debug.xcconfig"; path = "Target Support Files/Pods-MediaPlayer/Pods-MediaPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +145,7 @@
 				3C743BBB272DF9430066AC90 /* CustomTabBarController.swift */,
 				3C743BC8272E3FFC0066AC90 /* SharesViewController.swift */,
 				3C743BCF272E46F40066AC90 /* FilesViewController.swift */,
+				3C743BD4272F3D7B0066AC90 /* MediaPlayerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7335862702D19100A7604D /* AppDelegate.swift in Sources */,
+				3C743BD5272F3D7B0066AC90 /* MediaPlayerViewController.swift in Sources */,
 				3C743BB7272DF65C0066AC90 /* UITableView+EXT.swift in Sources */,
 				3C7336082729111400A7604D /* Share.swift in Sources */,
 				3C743BA0272A5F480066AC90 /* AuthenticationViewController.swift in Sources */,
