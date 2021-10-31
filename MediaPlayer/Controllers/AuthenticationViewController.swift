@@ -16,6 +16,7 @@ class AuthenticationViewController: UITableViewController, UITextFieldDelegate {
                                             target: self,
                                             action: #selector(connect))
     let activityIndicatorButtonItem = UIBarButtonItem(customView: UIActivityIndicatorView(style: .medium))
+    private let validator = Validator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,8 @@ class AuthenticationViewController: UITableViewController, UITextFieldDelegate {
 
         self.navigationItem.leftBarButtonItem = activityIndicatorButtonItem
         self.navigationItem.rightBarButtonItem = connectButtonItem
+
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -85,8 +88,6 @@ extension AuthenticationViewController {
 
 extension AuthenticationViewController {
     @IBAction func connect() {
-        let validator = Validator()
-
         if serverCell.textField.validate([validator.isIPAddressValid]) == false {
             handleTextfieldValidation(in: serverCell.textField,
                                       message: "Please enter a valid IP address")
@@ -159,6 +160,9 @@ extension AuthenticationViewController {
     }
 
     @objc func textDidChange(sender: UITextField) {
+        self.navigationItem.rightBarButtonItem?.isEnabled = (serverCell.textField.validate([validator.isIPAddressValid]) == true
+                                                                && usernameCell.textField.validate([validator.isUsernameValid]) == true)
+
         if sender.textColor == .red {
             if #available(iOS 13.0, *) {
                 sender.textColor = .label
