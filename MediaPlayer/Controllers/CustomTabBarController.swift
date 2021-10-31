@@ -9,7 +9,7 @@ import UIKit
 
 class CustomTabBarController: UITabBarController {
     var authenticationController: UINavigationController {
-        let authenticationController = AuthenticationViewController()
+        let authenticationController = AuthenticationViewController(style: .grouped)
         let authenticationTabBarItem = UITabBarItem(title: "Network", image: UIImage(systemName: "network"), selectedImage: nil)
         authenticationController.tabBarItem = authenticationTabBarItem
 
