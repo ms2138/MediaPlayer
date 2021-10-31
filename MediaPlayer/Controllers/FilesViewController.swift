@@ -42,6 +42,31 @@ class FilesViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if (files.count == 0) {
+            guard let paths = paths else { return }
+
+            let path = paths.joined(separator: "/")
+            loadFiles(atPath: path)
+        }
+    }
+}
+
+extension FilesViewController {
+    func loadFiles(atPath path: String) {
+        smbClient.contentsOfDirectory(atPath: path, completion: { [weak self] (listOfFiles, error) in
+            guard let weakSelf = self else { return }
+
+            if let error = error {
+                debugLog("Error: \(error)")
+            } else {
+                let filteredFiles = listOfFiles.filter { $0.name.first != "." }.sorted(by: { $0.name < $1.name })
+                weakSelf.files = filteredFiles
+                DispatchQueue.main.async {
+                    weakSelf.tableView.reloadData()
+                }
+            }
+        })
     }
 }
 
