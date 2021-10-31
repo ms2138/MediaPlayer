@@ -121,6 +121,13 @@ extension AuthenticationViewController {
                                 indicator.stopAnimating()
                             }
                         }
+                    } else {
+                        DispatchQueue.main.async {
+                            let sharesViewController = SharesViewController(style: .plain, smbClient: smbClient)
+                            sharesViewController.shares = shares
+                            self.navigationController?.pushViewController(sharesViewController, animated: true)
+                            indicator.stopAnimating()
+                        }
                     }
                 }
             }
