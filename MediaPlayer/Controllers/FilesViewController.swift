@@ -8,6 +8,17 @@
 import UIKit
 
 class FilesViewController: UITableViewController {
+    var smbClient: SMB2Client
+
+    init(style: UITableView.Style, smbClient: SMB2Client) {
+        self.smbClient = smbClient
+
+        super.init(style: style)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
