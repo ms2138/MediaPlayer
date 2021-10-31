@@ -93,6 +93,7 @@ class MediaControlView: UIView {
         bottomView.addSubview(totalTimeLabel)
         bottomView.addSubview(currentTimeLabel)
         bottomView.addSubview(playButton)
+        bottomView.addSubview(positionSlider)
 
         topView.addSubview(closeButton)
         topView.addSubview(titleLabel)
