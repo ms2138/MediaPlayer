@@ -68,3 +68,31 @@ extension SharesViewController {
         return cell
     }
 }
+
+extension SharesViewController {
+    // MARK: - Table view delegate
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let share = shares[indexPath.row]
+
+        smbClient.connectShare(name: share.name, completion: { [weak self] (error) in
+            guard let weakSelf = self else { return }
+
+            if let error = error {
+                debugLog("Error: \(error)")
+            } else {
+                DispatchQueue.main.async {
+                    let filesViewController = FilesViewController(style: .plain, smbClient: weakSelf.smbClient)
+
+                    filesViewController.share = share.name
+                    filesViewController.paths = [String]()
+                    filesViewController.smbClient = weakSelf.smbClient
+
+                    weakSelf.navigationController?.pushViewController(filesViewController, animated: true)
+                }
+            }
+        })
+
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
