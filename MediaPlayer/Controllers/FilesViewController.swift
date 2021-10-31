@@ -9,6 +9,7 @@ import UIKit
 
 class FilesViewController: UITableViewController {
     var smbClient: SMB2Client
+    var paths: [String]?
     var files = [File]()
     private var downloadAccessoryButton: UIButton {
         let accessoryButton = UIButton(type: .custom)
@@ -73,6 +74,27 @@ extension FilesViewController {
         cell.textLabel?.text = file.name
 
         return cell
+    }
+}
+
+extension FilesViewController {
+    // MARK: - Table view delegate
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let file = files[indexPath.row]
+
+        if (file.isDirectory == true) {
+            let filesViewController = FilesViewController(style: .plain, smbClient: smbClient)
+            let paths = file.path.split(separator: "/", maxSplits: 1).compactMap { String($0) }
+            filesViewController.paths = paths
+            filesViewController.smbClient = smbClient
+
+            navigationController?.pushViewController(filesViewController, animated: true)
+
+        } else {
+
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

@@ -84,7 +84,6 @@ extension SharesViewController {
                 DispatchQueue.main.async {
                     let filesViewController = FilesViewController(style: .plain, smbClient: weakSelf.smbClient)
 
-                    filesViewController.share = share.name
                     filesViewController.paths = [String]()
                     filesViewController.smbClient = weakSelf.smbClient
 
