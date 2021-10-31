@@ -8,6 +8,8 @@
 import UIKit
 
 class LibraryViewController: UITableViewController {
+    private let reuseIdentifier = "MediaCell"
+
     var media = [URL]()
 
     override func viewDidLoad() {
@@ -29,7 +31,7 @@ extension LibraryViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MediaCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 
         let filename = media[indexPath.row]
 
