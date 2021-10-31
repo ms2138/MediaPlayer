@@ -28,6 +28,7 @@
 		3C743BB4272DEFA90066AC90 /* InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743BB3272DEFA90066AC90 /* InputValidation.swift */; };
 		3C743BB7272DF65C0066AC90 /* UITableView+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743BB6272DF65C0066AC90 /* UITableView+EXT.swift */; };
 		3C743BBC272DF9430066AC90 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743BBB272DF9430066AC90 /* CustomTabBarController.swift */; };
+		3C743BC9272E3FFC0066AC90 /* SharesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C743BC8272E3FFC0066AC90 /* SharesViewController.swift */; };
 		3D3B030012F080D3095AF362 /* Pods_MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2501563ECEDB2ABC4272580B /* Pods_MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		3C743BB3272DEFA90066AC90 /* InputValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValidation.swift; sourceTree = "<group>"; };
 		3C743BB6272DF65C0066AC90 /* UITableView+EXT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+EXT.swift"; sourceTree = "<group>"; };
 		3C743BBB272DF9430066AC90 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		3C743BC8272E3FFC0066AC90 /* SharesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharesViewController.swift; sourceTree = "<group>"; };
 		412898A3F05A84820C6A394E /* Pods-MediaPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaPlayer.release.xcconfig"; path = "Target Support Files/Pods-MediaPlayer/Pods-MediaPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		D246795707056495A24D8D1E /* Pods-MediaPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaPlayer.debug.xcconfig"; path = "Target Support Files/Pods-MediaPlayer/Pods-MediaPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 				3C743B8F272A59C80066AC90 /* LibraryViewController.swift */,
 				3C743B9F272A5F480066AC90 /* AuthenticationViewController.swift */,
 				3C743BBB272DF9430066AC90 /* CustomTabBarController.swift */,
+				3C743BC8272E3FFC0066AC90 /* SharesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				3C743B9A272A5DC00066AC90 /* FileManager+EXT.swift in Sources */,
 				3C73360D2729133900A7604D /* File.swift in Sources */,
 				3C743BBC272DF9430066AC90 /* CustomTabBarController.swift in Sources */,
+				3C743BC9272E3FFC0066AC90 /* SharesViewController.swift in Sources */,
 				3C743BAD272DEEDB0066AC90 /* UITextField+EXT.swift in Sources */,
 				3C73360427290EC200A7604D /* SMB2Client.swift in Sources */,
 				3C743BA9272DEE560066AC90 /* Logging.swift in Sources */,
