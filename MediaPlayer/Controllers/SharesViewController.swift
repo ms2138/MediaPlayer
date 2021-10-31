@@ -11,11 +11,38 @@ class SharesViewController: UITableViewController {
     private let reuseIdentifier = "ShareCell"
 
     var shares = [Share]()
+    var smbClient: SMB2Client
+
+    init(style: UITableView.Style, smbClient: SMB2Client) {
+        self.smbClient = smbClient
+
+        super.init(style: style)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+
+        if (shares.count == 0) {
+            loadShares()
+        }
+    }
+}
+
+extension SharesViewController {
+    func loadShares() {
+        smbClient.listShares { [unowned self] (shares, error) in
+            DispatchQueue.main.async {
+                let sharesViewController = SharesViewController(style: .plain, smbClient: smbClient)
+                sharesViewController.shares = shares
+                self.navigationController?.pushViewController(sharesViewController, animated: true)
+            }
+        }
     }
 }
 
