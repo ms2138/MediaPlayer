@@ -12,6 +12,8 @@ class LibraryViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Media"
     }
 }
 
