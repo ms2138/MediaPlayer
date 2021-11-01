@@ -10,6 +10,7 @@ import UIKit
 class FilesViewController: UITableViewController {
     var smbClient: SMB2Client
     var paths: [String]?
+    var share: String?
     var files = [File]()
     private var downloadAccessoryButton: UIButton {
         let accessoryButton = UIButton(type: .custom)
@@ -112,12 +113,32 @@ extension FilesViewController {
             let filesViewController = FilesViewController(style: .plain, smbClient: smbClient)
             let paths = file.path.split(separator: "/", maxSplits: 1).compactMap { String($0) }
             filesViewController.paths = paths
+            filesViewController.share = share
             filesViewController.smbClient = smbClient
 
             navigationController?.pushViewController(filesViewController, animated: true)
 
         } else {
+            let path = NSString(string: file.path)
+            switch path.pathExtension {
+                case "mkv", "mp4", "avi", "mpg", "wmv":
+                    guard let share = share else { return }
+                    var urlComponents = URLComponents()
+                    urlComponents.scheme = self.smbClient.url.scheme
+                    urlComponents.host = self.smbClient.url.host
+                    urlComponents.user = self.smbClient.credential.user
+                    urlComponents.password = self.smbClient.credential.password
+                    urlComponents.path = "/" + [share, file.path].joined(separator: "/")
 
+                    if let authorizedStream = urlComponents.url {
+                        let mediaPlayerViewController = MediaPlayerViewController(streamURL: authorizedStream)
+                        mediaPlayerViewController.hidesBottomBarWhenPushed = true
+
+                        navigationController?.pushViewController(mediaPlayerViewController, animated: true)
+                    }
+                default:
+                    break
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
