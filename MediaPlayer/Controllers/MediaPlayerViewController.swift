@@ -45,6 +45,16 @@ class MediaPlayerViewController: UIViewController {
         loadVideoStream(for: url)
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+}
+
+extension MediaPlayerViewController {
+    // MARK: - Media Player actions
+
     func loadVideoStream(for url: URL) {
         mediaPlayer.loadVideo(from: url)
     }
