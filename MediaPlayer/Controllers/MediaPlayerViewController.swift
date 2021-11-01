@@ -37,6 +37,15 @@ class MediaPlayerViewController: UIViewController {
 
         navigationController?.setNavigationBarHidden(true, animated: false)
 
+        mediaPlayer.close = {
+            self.navigationController?.popViewController(animated: true)
+        }
+
+        mediaPlayer.fullScreen = {
+            let value = UIInterfaceOrientation.landscapeLeft.rawValue
+            UIDevice.current.setValue(value, forKey: "orientation")
+        }
+
         loadVideoStream(for: url)
     }
 
