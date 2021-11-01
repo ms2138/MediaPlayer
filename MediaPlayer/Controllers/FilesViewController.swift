@@ -57,6 +57,12 @@ class FilesViewController: UITableViewController {
             loadFiles(atPath: path)
         }
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        smbClient.cancelAllDownloads()
+    }
 }
 
 extension FilesViewController {
