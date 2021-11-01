@@ -85,6 +85,7 @@ extension SharesViewController {
                     let filesViewController = FilesViewController(style: .plain, smbClient: weakSelf.smbClient)
 
                     filesViewController.paths = [String]()
+                    filesViewController.share = share.name
                     filesViewController.smbClient = weakSelf.smbClient
 
                     weakSelf.navigationController?.pushViewController(filesViewController, animated: true)
