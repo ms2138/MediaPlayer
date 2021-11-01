@@ -33,12 +33,7 @@ class MediaPlayerViewController: UIViewController {
 
         view.addSubview(mediaPlayer)
 
-        NSLayoutConstraint.activate([
-            mediaPlayer.topAnchor.constraint(equalTo: view.topAnchor),
-            mediaPlayer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            mediaPlayer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mediaPlayer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
+        setupConstraints()
 
         navigationController?.setNavigationBarHidden(true, animated: false)
 
@@ -49,6 +44,15 @@ class MediaPlayerViewController: UIViewController {
         super.viewWillDisappear(animated)
 
         navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            mediaPlayer.topAnchor.constraint(equalTo: view.topAnchor),
+            mediaPlayer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mediaPlayer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mediaPlayer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
     }
 }
 
