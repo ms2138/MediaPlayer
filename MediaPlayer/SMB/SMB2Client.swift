@@ -11,7 +11,7 @@ import AMSMB2
 class SMB2Client {
     let url: URL
     let credential: URLCredential
-    private var activeDownloads = [Int: Bool]()
+    private var activeDownloads = [String: Bool]()
 
     private var client: AMSMB2
 
@@ -75,36 +75,31 @@ extension SMB2Client {
         }
     }
 
-    func downloadItem(atPath path: String, to url: URL, progress: @escaping (Int64, Int64) -> Void, completion: @escaping (Error) -> Void) -> Int {
-        let hashValue = path.hashValue
-
-        activeDownloads[hashValue] = true
+    func downloadItem(atPath path: String, to url: URL, progress: @escaping (Int64, Int64) -> Void, completion: @escaping (Error) -> Void) {
+        activeDownloads[path] = true
 
         let progress = AMSMB2.ReadProgressHandler.init { [weak self] (one, two) -> Bool in
             progress(one, two)
 
-            return self?.activeDownloads[hashValue] ?? false
+            return self?.activeDownloads[path] ?? false
         }
 
         client.downloadItem(atPath: path, to: url, progress: progress) { [weak self] (error) in
             guard let weakSelf = self else { return }
 
-            if let isDownloading = weakSelf.activeDownloads[hashValue], isDownloading == false {
+            if let isDownloading = weakSelf.activeDownloads[path], isDownloading == false {
                 do {
                     try FileManager.default.removeItem(at: url)
                 } catch {
                     debugLog("Failed to delete \(url)")
                 }
             }
-            weakSelf.activeDownloads.removeValue(forKey: hashValue)
+            weakSelf.activeDownloads.removeValue(forKey: path)
         }
-
-        return hashValue
     }
 
     func cancelDownloadItem(atPath path: String) {
-        let hashValue = path.hashValue
-        activeDownloads[hashValue] = false
+        activeDownloads[path] = false
     }
 
     func cancelAllDownloads() {
