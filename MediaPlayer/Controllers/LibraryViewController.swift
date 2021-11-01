@@ -14,8 +14,32 @@ class LibraryViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+
         navigationItem.title = "Media"
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        loadMedia()
+    }
+}
+
+extension LibraryViewController {
+    func loadMedia() {
+        if let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            do {
+                let files = try FileManager.default.contentsOfDirectory(at: documentsUrl,
+                                                                        includingPropertiesForKeys: nil,
+                                                                        options: .skipsHiddenFiles)
+                media = files
+                tableView.reloadData()
+            } catch {
+                debugLog("Error loading files from directory")
+            }
+        }
     }
 }
 
