@@ -26,6 +26,8 @@ class SharesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.title = "Shares"
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
 
         if (shares.count == 0) {

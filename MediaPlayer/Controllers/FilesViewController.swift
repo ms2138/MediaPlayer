@@ -44,6 +44,12 @@ class FilesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let path = paths?.last {
+            navigationItem.title = path
+        } else {
+            navigationItem.title = share
+        }
+
         if (files.count == 0) {
             guard let paths = paths else { return }
 
