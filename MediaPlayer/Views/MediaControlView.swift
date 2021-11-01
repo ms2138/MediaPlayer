@@ -230,17 +230,17 @@ extension MediaControlView {
             weakSelf.mainView.backgroundColor = UIColor(white: 0, alpha: isVisible ? 0.2 : 0.0)
         }) { [weak self] (_) in
             if (isVisible == true) {
-                self?.autoFadeOutMediaControlView()
+                self?.autoFadeOutMediaControlView(afterDelay: 3.0)
             }
         }
     }
 
-    func autoFadeOutMediaControlView() {
+    func autoFadeOutMediaControlView(afterDelay delay: Double) {
         delayItem?.cancel()
         delayItem = DispatchWorkItem { [weak self] in
             self?.animateMediaControlViewDisplay(isVisible: false)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0,
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay,
                                       execute: delayItem!)
     }
 }
