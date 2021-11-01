@@ -77,6 +77,16 @@ class MediaControlView: UIView {
         closeButton.setImage(UIImage(named: "close"), for: .normal)
         closeButton.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
 
+        totalTimeLabel.textColor = UIColor.white
+        totalTimeLabel.textAlignment = .center
+        totalTimeLabel.font = UIFont.systemFont(ofSize: 12)
+        totalTimeLabel.text = "00:00"
+
+        currentTimeLabel.textColor = UIColor.white
+        currentTimeLabel.textAlignment = .center
+        currentTimeLabel.font = UIFont.systemFont(ofSize: 12)
+        currentTimeLabel.text = "00:00"
+
         positionSlider.maximumValue = 1.0
         positionSlider.minimumValue = 0.0
         positionSlider.value = 0.0
