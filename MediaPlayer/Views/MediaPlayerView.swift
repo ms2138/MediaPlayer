@@ -59,6 +59,10 @@ class MediaPlayerView: UIView, VLCMediaPlayerDelegate {
             mediaView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
             activityIndicatorView.centerYAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerYAnchor),
             activityIndicatorView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            mediaControlView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            mediaControlView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            mediaControlView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
+            mediaControlView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
         ])
 
         mediaPlayer.drawable = mediaView
