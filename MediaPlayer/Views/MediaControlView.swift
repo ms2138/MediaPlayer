@@ -72,8 +72,10 @@ class MediaControlView: UIView {
 
         playButton.setImage(isPlaying ? UIImage(named: "pause") : UIImage(named: "play"), for: .normal)
         playButton.setImage(isPlaying ? UIImage(named: "play") : UIImage(named: "pause"), for: .highlighted)
+        playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
 
         closeButton.setImage(UIImage(named: "close"), for: .normal)
+        closeButton.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
 
         positionSlider.maximumValue = 1.0
         positionSlider.minimumValue = 0.0
