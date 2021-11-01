@@ -78,3 +78,18 @@ extension LibraryViewController {
         }
     }
 }
+
+extension LibraryViewController {
+    // MARK: - Table view delegate
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let authorizedStream = media[indexPath.row]
+
+        let mediaPlayerViewController = MediaPlayerViewController(streamURL: authorizedStream)
+        mediaPlayerViewController.hidesBottomBarWhenPushed = true
+
+        navigationController?.pushViewController(mediaPlayerViewController, animated: true)
+
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
