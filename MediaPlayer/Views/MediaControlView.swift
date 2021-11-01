@@ -68,9 +68,9 @@ class MediaControlView: UIView {
         fullScreenButton.translatesAutoresizingMaskIntoConstraints = false
         positionSlider.translatesAutoresizingMaskIntoConstraints = false
 
-        mainView.backgroundColor = UIColor(white: 0, alpha: 0.0)
+        mainView.backgroundColor = UIColor.clear
 
-        playButton.setImage(isPlaying ? UIImage(named: "pause") : UIImage(named: "play"),  for: .normal)
+        playButton.setImage(isPlaying ? UIImage(named: "pause") : UIImage(named: "play"), for: .normal)
         playButton.setImage(isPlaying ? UIImage(named: "play") : UIImage(named: "pause"), for: .highlighted)
 
         closeButton.setImage(UIImage(named: "close"), for: .normal)
@@ -78,12 +78,13 @@ class MediaControlView: UIView {
         positionSlider.maximumValue = 1.0
         positionSlider.minimumValue = 0.0
         positionSlider.value = 0.0
+        positionSlider.setThumbImage(UIImage(named: "thumb"), for: .normal)
 
         titleLabel.text = "Title"
         titleLabel.textColor = UIColor.white
         titleLabel.textAlignment = .center
 
-        fullScreenButton.setImage(UIImage(named: "fullscreen"),    for: .normal)
+        fullScreenButton.setImage(UIImage(named: "fullscreen"), for: .normal)
         fullScreenButton.addTarget(self, action: #selector(fullScreenButtonPressed), for: .touchUpInside)
 
         addSubview(mainView)
