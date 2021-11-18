@@ -9,6 +9,9 @@ import Foundation
 import AMSMB2
 
 class SMB2Client {
+    enum State {
+        case downloaded, cancelled
+    }
     let url: URL
     let credential: URLCredential
     private var activeDownloads = [String: Bool]()
@@ -75,7 +78,7 @@ extension SMB2Client {
         }
     }
 
-    func downloadItem(atPath path: String, to url: URL, progress: @escaping (Int64, Int64) -> Void, completion: @escaping (Error) -> Void) {
+    func downloadItem(atPath path: String, to url: URL, progress: @escaping (Int64, Int64) -> Void, completion: @escaping (Error?, State) -> Void) {
         activeDownloads[path] = true
 
         let progress = AMSMB2.ReadProgressHandler.init { [weak self] (one, two) -> Bool in
@@ -93,7 +96,10 @@ extension SMB2Client {
                 } catch {
                     debugLog("Failed to delete \(url)")
                 }
-            }
+                completion(error, .cancelled)
+            } else {
+                completion(error, .downloaded)
+            } 
             weakSelf.activeDownloads.removeValue(forKey: path)
         }
     }
