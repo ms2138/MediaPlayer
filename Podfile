@@ -8,4 +8,5 @@ target 'MediaPlayer' do
   # Pods for MediaPlayer
   pod "AMSMB2"
   pod 'MobileVLCKit'
+  pod 'AHDownloadButton'
 end

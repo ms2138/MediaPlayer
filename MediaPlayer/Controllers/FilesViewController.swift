@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import AHDownloadButton
 
 class FilesViewController: UITableViewController {
     var smbClient: SMB2Client
     var paths: [String]?
     var share: String?
     var files = [File]()
+    var downloadAccessoryButtons = [Int: AHDownloadButton]()
+    
     private var downloadAccessoryButton: UIButton {
         let accessoryButton = UIButton(type: .custom)
         accessoryButton.setImage(UIImage(systemName: "arrow.down.circle"), for: .normal)
@@ -179,7 +182,7 @@ extension FilesViewController {
                         button.setTitle("\(progress)%", for: .normal)
                     }
 
-                }, completion: { (error) in
+                }, completion: { (error, state)  in
                     debugLog("Error \(error)")
                 })
             }
