@@ -104,7 +104,7 @@ extension SMB2Client {
         }
     }
 
-    func cancelDownloadItem(atPath path: String) {
+    func cancelDownload(atPath path: String) {
         activeDownloads[path] = false
     }
 
