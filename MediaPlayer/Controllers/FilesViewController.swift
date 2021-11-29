@@ -14,25 +14,6 @@ class FilesViewController: UITableViewController {
     var share: String?
     var files = [File]()
     var downloadAccessoryButtons = [Int: AHDownloadButton]()
-    
-    private var downloadAccessoryButton: UIButton {
-        let accessoryButton = UIButton(type: .custom)
-        accessoryButton.setImage(UIImage(systemName: "arrow.down.circle"), for: .normal)
-        accessoryButton.addTarget(self, action: #selector(downloadFile), for: .touchUpInside)
-        accessoryButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        accessoryButton.contentMode = .scaleAspectFit
-
-        return accessoryButton
-    }
-    private var cancelAccessoryButton: UIButton {
-        let accessoryButton = UIButton(type: .roundedRect)
-        accessoryButton.addTarget(self, action: #selector(cancelDownload), for: .touchUpInside)
-        accessoryButton.setTitle("0%", for: .normal)
-        accessoryButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-        accessoryButton.contentMode = .scaleAspectFit
-
-        return accessoryButton
-    }
 
     init(style: UITableView.Style, smbClient: SMB2Client) {
         self.smbClient = smbClient
@@ -109,7 +90,20 @@ extension FilesViewController {
             cell.imageView?.image = UIImage(systemName: "doc")
             cell.detailTextLabel?.text = ByteCountFormatter.string(fromByteCount: file.size, countStyle: .file)
 
-            cell.accessoryView = downloadAccessoryButton
+            if let button = downloadAccessoryButtons[indexPath.row] {
+                cell.accessoryView = button
+            } else {
+                let downloadButton = AHDownloadButton()
+                downloadButton.frame = CGRect(x: 0, y: 0, width: 44, height: 24)
+                downloadButton.downloadedButtonTitleSidePadding = 8.0
+                downloadButton.downloadingButtonCircleLineWidth = 2.0
+                downloadButton.didTapDownloadButtonAction = { button, state in
+                    self.downloadFile(button: button, state: state)
+                }
+
+                downloadAccessoryButtons[indexPath.row] = downloadButton
+                cell.accessoryView = downloadButton
+            }
         }
 
         cell.textLabel?.text = file.name
@@ -162,44 +156,57 @@ extension FilesViewController {
 extension FilesViewController {
     // MARK: - File operations
 
-    @objc func downloadFile(sender: UIButton) {
-        let pointInTable: CGPoint = sender.convert(sender.bounds.origin, to: self.tableView)
-        if let index = tableView.indexPathForRow(at: pointInTable) {
-            let cell = tableView.cellForRow(at: index)
+    func downloadFile(button: AHDownloadButton, state: AHDownloadButton.State) {
+        let pointInTable: CGPoint = button.convert(button.bounds.origin, to: self.tableView)
+        if let indexPath = tableView.indexPathForRow(at: pointInTable) {
 
-            let file = files[index.row]
+            let file = files[indexPath.row]
+            switch state {
+                case .startDownload:
+                    if let filename = file.path.split(separator: "/").compactMap({ String($0) }).last {
+                        let fileUrl = FileManager.default.pathToFile(filename: filename)
 
-            cell?.accessoryView = cancelAccessoryButton
+                        button.state = .pending
 
-            if let filename = file.path.split(separator: "/").compactMap({ String($0) }).last {
-                let fileUrl = FileManager.default.pathToFile(filename: filename)
+                        smbClient.downloadItem(atPath: file.path, to: fileUrl, progress: { (one, two) in
+                            let progress = CGFloat((Double(one) / Double(two)))
 
-                smbClient.downloadItem(atPath: file.path, to: fileUrl, progress: { (one, two) in
-                    let progress = Int((Double(one) / Double(two)) * 100)
-
-                    DispatchQueue.main.async {
-                        let button = cell?.accessoryView as! UIButton
-                        button.setTitle("\(progress)%", for: .normal)
+                            DispatchQueue.main.async {
+                                button.progress = progress
+                                button.state = .downloading
+                            }
+                        }, completion: { (error, state) in
+                            if (state == .cancelled) {
+                                button.state = .startDownload
+                            } else {
+                                button.state = .downloaded
+                            }
+                        })
                     }
+                case .pending:
+                    break
+                case .downloading:
+                    self.smbClient.cancelDownload(atPath: file.path)
+                case .downloaded:
+                    self.openFile(sender: button)
 
-                }, completion: { (error, state)  in
-                    debugLog("Error \(error)")
-                })
             }
         }
     }
 
-    @objc func cancelDownload(sender: UIButton) {
+    func openFile(sender: AHDownloadButton) {
         let pointInTable: CGPoint = sender.convert(sender.bounds.origin, to: self.tableView)
-        if let index = tableView.indexPathForRow(at: pointInTable) {
-            let cell = tableView.cellForRow(at: index)
+        if let indexPath = tableView.indexPathForRow(at: pointInTable) {
+            let file = files[indexPath.row]
 
-            let file = files[index.row]
+            let pathToFile = FileManager.default.pathToFile(filename: file.name)
 
-            smbClient.cancelDownloadItem(atPath: file.path)
+            let mediaPlayerViewController = MediaPlayerViewController(streamURL: pathToFile)
+            mediaPlayerViewController.hidesBottomBarWhenPushed = true
 
-            cell?.accessoryView = downloadAccessoryButton
+            navigationController?.pushViewController(mediaPlayerViewController, animated: true)
+
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-
     }
 }
