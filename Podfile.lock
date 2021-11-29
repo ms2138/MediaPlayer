@@ -1,20 +1,24 @@
 PODS:
+  - AHDownloadButton (1.3.0)
   - AMSMB2 (2.7.1)
   - MobileVLCKit (3.3.17)
 
 DEPENDENCIES:
+  - AHDownloadButton
   - AMSMB2
   - MobileVLCKit
 
 SPEC REPOS:
   trunk:
+    - AHDownloadButton
     - AMSMB2
     - MobileVLCKit
 
 SPEC CHECKSUMS:
+  AHDownloadButton: f0778a7e406b49a590c48b241f1ff8e8f1cc5ab4
   AMSMB2: 4017852863a688970e8c4f38a4fae9826fbbec34
   MobileVLCKit: c5dd1b0ae933dc9c2348099840e753496dcdd908
 
-PODFILE CHECKSUM: 5d1227ad9b1140931293b8c3f55427f79df0d23b
+PODFILE CHECKSUM: 50d0ffe726753a79c0c992f5b25d13aefbb4a929
 
 COCOAPODS: 1.10.2
