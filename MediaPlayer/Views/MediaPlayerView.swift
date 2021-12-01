@@ -89,7 +89,6 @@ extension MediaPlayerView {
         mediaPlayer.media = media
 
         mediaPlayer.delegate = self
-        mediaControlView.isPlaying = mediaPlayer.isPlaying
         mediaControlView.currentTimeLabel.text = mediaPlayer.time.stringValue
         mediaControlView.positionSlider.setValue(mediaPlayer.position, animated: true)
         mediaPlayer.play()
@@ -116,6 +115,7 @@ extension MediaPlayerView {
 
         if (mediaPlayer.isPlaying == true) {
             activityIndicatorView.stopAnimating()
+            mediaControlView.isPlaying = mediaPlayer.isPlaying
         }
     }
 }
