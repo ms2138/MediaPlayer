@@ -11,6 +11,7 @@ protocol MediaControlViewDelegate: class {
     func mediaControlView(controlView: MediaControlView, didPerformAction action: MediaControlView.Action)
     func mediaControlView(controlView: MediaControlView, slider: UISlider)
     func mediaControlView(controlView: MediaControlView, slider: UISlider, onSliderTapped position: Float)
+    func mediaControlView(controlView: MediaControlView, didPerformSwipe gesture: UISwipeGestureRecognizer)
 }
 
 class MediaControlView: UIView {
@@ -120,6 +121,22 @@ class MediaControlView: UIView {
 
         let positionSliderTapGesture = UITapGestureRecognizer(target: self, action:#selector(positionSliderTapped))
         positionSlider.addGestureRecognizer(positionSliderTapGesture)
+
+        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(onSwipeGesture))
+        swipeUpGesture.direction = .up
+        addGestureRecognizer(swipeUpGesture)
+
+        let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(onSwipeGesture))
+        swipeDownGesture.direction = .down
+        addGestureRecognizer(swipeDownGesture)
+
+        let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(onSwipeGesture))
+        swipeLeftGesture.direction = .left
+        addGestureRecognizer(swipeLeftGesture)
+
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(onSwipeGesture))
+        swipeRightGesture.direction = .right
+        addGestureRecognizer(swipeRightGesture)
     }
 
     func setupConstraints() {
@@ -216,6 +233,10 @@ extension MediaControlView {
 
     @objc open func onTapGesture(_ gesture: UITapGestureRecognizer) {
         animateMediaControlViewDisplay(isVisible: !isMediaControlShown)
+    }
+
+    @objc open func onSwipeGesture(_ gesture: UISwipeGestureRecognizer) {
+        delegate?.mediaControlView(controlView: self, didPerformSwipe: gesture)
     }
 }
 
