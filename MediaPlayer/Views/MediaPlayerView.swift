@@ -89,6 +89,7 @@ extension MediaPlayerView {
         mediaPlayer.media = media
 
         mediaPlayer.delegate = self
+        mediaPlayer.audio.volume = 50
         mediaControlView.currentTimeLabel.text = mediaPlayer.time.stringValue
         mediaControlView.positionSlider.setValue(mediaPlayer.position, animated: true)
         mediaPlayer.play()
@@ -142,5 +143,20 @@ extension MediaPlayerView: MediaControlViewDelegate {
 
     func mediaControlView(controlView: MediaControlView, slider: UISlider, onSliderTapped position: Float) {
         mediaPlayer.position = position
+    }
+
+    func mediaControlView(controlView: MediaControlView, didPerformSwipe gesture: UISwipeGestureRecognizer) {
+        switch gesture.direction {
+            case .up:
+                mediaPlayer.audio.volumeUp()
+            case .down:
+                mediaPlayer.audio.volumeDown()
+            case .right:
+                mediaPlayer.shortJumpForward()
+            case .left:
+                mediaPlayer.shortJumpBackward()
+            default:
+                break
+        }
     }
 }
