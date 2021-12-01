@@ -33,7 +33,12 @@ class MediaControlView: UIView {
 
     var delayItem: DispatchWorkItem?
 
-    var isPlaying: Bool = false
+    var isPlaying: Bool = false {
+        willSet {
+            playButton.setImage(newValue == true ? UIImage(named: "pause") : UIImage(named: "play"), for: .normal)
+            playButton.setImage(newValue == true ? UIImage(named: "play") : UIImage(named: "pause"), for: .highlighted)
+        }
+    }
     var isMediaControlShown: Bool = true
 
     private var tapGesture: UITapGestureRecognizer!
@@ -70,8 +75,6 @@ class MediaControlView: UIView {
 
         mainView.backgroundColor = UIColor.clear
 
-        playButton.setImage(isPlaying ? UIImage(named: "pause") : UIImage(named: "play"), for: .normal)
-        playButton.setImage(isPlaying ? UIImage(named: "play") : UIImage(named: "pause"), for: .highlighted)
         playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
 
         closeButton.setImage(UIImage(named: "close"), for: .normal)
@@ -195,14 +198,12 @@ extension MediaControlView {
     }
 
     @objc func playButtonPressed(sender: UIButton) {
-        isPlaying = !isPlaying
-        playButton.setImage(isPlaying ? UIImage(named: "play") : UIImage(named: "pause"),  for: .normal)
-        playButton.setImage(isPlaying ? UIImage(named: "pause") : UIImage(named: "play"), for: .highlighted)
         if (isPlaying == true) {
             delegate?.mediaControlView(controlView: self, didPerformAction: .pause)
         } else {
             delegate?.mediaControlView(controlView: self, didPerformAction: .play)
         }
+        isPlaying = !isPlaying
     }
 
     @objc func closeButtonPressed(sender: UIButton) {
